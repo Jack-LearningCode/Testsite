@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './AuthContext'
 import { ProtectedRoute } from './ProtectedRoute'
+import { LandingPage } from './pages/LandingPage'
 import { LoginPage } from './pages/LoginPage'
-import { HomePage } from './pages/HomePage'
+import { PortalPage } from './pages/PortalPage'
 import './App.css'
 
 function App() {
@@ -10,12 +11,13 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route
-            path="/"
+            path="/portal"
             element={
               <ProtectedRoute>
-                <HomePage />
+                <PortalPage />
               </ProtectedRoute>
             }
           />

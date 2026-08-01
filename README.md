@@ -1,6 +1,7 @@
-# Testsite
+# Simple NPS
 
-React + Vite app with Supabase email/password auth, deployed to Firebase Hosting.
+Marketing site + customer portal for Simple NPS, built with React + Vite,
+Supabase email/password auth, and Firebase Hosting.
 
 ## Setup
 

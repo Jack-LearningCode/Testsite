@@ -14,7 +14,7 @@ export function LoginPage() {
   const [submitting, setSubmitting] = useState(false)
 
   if (user) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/portal" replace />
   }
 
   async function handleSubmit(e) {
@@ -23,7 +23,7 @@ export function LoginPage() {
     setMessage(null)
     setSubmitting(true)
 
-    const { error } = mode === 'sign-in'
+    const { data, error } = mode === 'sign-in'
       ? await signIn(email, password)
       : await signUp(email, password)
 
@@ -34,12 +34,12 @@ export function LoginPage() {
       return
     }
 
-    if (mode === 'sign-up') {
+    if (mode === 'sign-up' && !data.session) {
       setMessage('Check your email to confirm your account before signing in.')
       return
     }
 
-    navigate('/')
+    navigate('/portal')
   }
 
   return (
