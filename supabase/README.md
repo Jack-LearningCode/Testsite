@@ -12,3 +12,11 @@ To apply it, either:
 
 In email/password auth mode, `auth.users` rows exist even before email
 confirmation, so the trigger fires at signup, not at first login.
+
+`migrations/0002_scorecards_and_responses.sql` creates `scorecards` (one row
+per NPS survey an account configures) and `responses` (one row per end-user
+submission), plus a `scorecard_public` view that exposes only the
+question/color/labels an embedded widget needs — never the owning user_id.
+Scorecards and responses are readable/writable only by their owner; anyone
+can INSERT a response, since that's what the public embed widget does on a
+customer's own website. Apply it the same way as 0001.
