@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
 
 export function LoginPage() {
@@ -44,49 +44,65 @@ export function LoginPage() {
 
   return (
     <div className="auth-page">
-      <form className="auth-form" onSubmit={handleSubmit}>
-        <h1>{mode === 'sign-in' ? 'Sign in' : 'Create an account'}</h1>
+      <Link className="auth-logo" to="/">
+        <span className="logo-mark">NPS</span>
+        Simple NPS
+      </Link>
 
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          autoComplete="email"
-        />
+      <div className="auth-card">
+        <h1>{mode === 'sign-in' ? 'Welcome back' : 'Create your account'}</h1>
+        <p className="auth-card-subtitle">
+          {mode === 'sign-in'
+            ? 'Sign in to manage your scorecards.'
+            : 'Start collecting NPS feedback in minutes.'}
+        </p>
 
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          minLength={6}
-          autoComplete={mode === 'sign-in' ? 'current-password' : 'new-password'}
-        />
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="field">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+            />
+          </div>
 
-        {error && <p className="error-message">{error}</p>}
-        {message && <p className="status-message">{message}</p>}
+          <div className="field">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={6}
+              autoComplete={mode === 'sign-in' ? 'current-password' : 'new-password'}
+            />
+          </div>
 
-        <button type="submit" disabled={submitting}>
-          {submitting ? 'Please wait...' : mode === 'sign-in' ? 'Sign in' : 'Sign up'}
-        </button>
+          {error && <p className="error-message">{error}</p>}
+          {message && <p className="status-message">{message}</p>}
 
-        <button
-          type="button"
-          className="link-button"
-          onClick={() => {
-            setMode(mode === 'sign-in' ? 'sign-up' : 'sign-in')
-            setError(null)
-            setMessage(null)
-          }}
-        >
-          {mode === 'sign-in' ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
-        </button>
-      </form>
+          <button className="cta-button" type="submit" disabled={submitting}>
+            {submitting ? 'Please wait...' : mode === 'sign-in' ? 'Sign in' : 'Sign up'}
+          </button>
+
+          <button
+            type="button"
+            className="link-button"
+            onClick={() => {
+              setMode(mode === 'sign-in' ? 'sign-up' : 'sign-in')
+              setError(null)
+              setMessage(null)
+            }}
+          >
+            {mode === 'sign-in' ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
