@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import { supabase } from '../../supabaseClient'
-import { calculateNps } from '../../nps'
+import { calculateNps, bucketByWeek } from '../../nps'
+import { NpsTrendChart } from '../../NpsTrendChart'
 
 export function AnalyticsPage() {
   const { scorecard } = useOutletContext()
@@ -13,7 +14,7 @@ export function AnalyticsPage() {
 
     supabase
       .from('responses')
-      .select('score')
+      .select('score, created_at')
       .eq('scorecard_id', scorecard.id)
       .then(({ data, error }) => {
         if (cancelled) return
@@ -71,6 +72,11 @@ export function AnalyticsPage() {
           <div className="breakdown-bar"><div className="breakdown-bar-fill detractor" style={{ width: `${pct(detractors)}%` }} /></div>
           <span className="breakdown-count">{detractors} ({pct(detractors)}%)</span>
         </div>
+      </div>
+
+      <div className="trend-card">
+        <h2>Weekly trend</h2>
+        <NpsTrendChart buckets={bucketByWeek(responses)} />
       </div>
     </div>
   )

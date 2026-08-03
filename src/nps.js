@@ -25,3 +25,29 @@ export function calculateNps(responses) {
 
   return { score, total, promoters, passives, detractors }
 }
+
+function startOfWeek(date) {
+  const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()))
+  const day = d.getUTCDay()
+  const diff = (day === 0 ? -6 : 1) - day
+  d.setUTCDate(d.getUTCDate() + diff)
+  return d
+}
+
+export function bucketByWeek(responses) {
+  const buckets = new Map()
+
+  for (const response of responses) {
+    const key = startOfWeek(new Date(response.created_at)).toISOString().slice(0, 10)
+    if (!buckets.has(key)) buckets.set(key, [])
+    buckets.get(key).push(response)
+  }
+
+  return Array.from(buckets.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([key, group]) => ({
+      weekStart: key,
+      label: new Date(key).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }),
+      ...calculateNps(group),
+    }))
+}

@@ -16,6 +16,11 @@ export function ScorecardEditPage() {
     dismiss_message: scorecard.dismiss_message,
     repeat_after_days: scorecard.repeat_after_days,
     dismiss_snooze_days: scorecard.dismiss_snooze_days,
+    promoter_followup_prompt: scorecard.promoter_followup_prompt,
+    passive_followup_prompt: scorecard.passive_followup_prompt,
+    detractor_followup_prompt: scorecard.detractor_followup_prompt,
+    include_paths: scorecard.include_paths,
+    exclude_paths: scorecard.exclude_paths,
   })
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState(null)
@@ -190,6 +195,70 @@ export function ScorecardEditPage() {
       </div>
       <p className="field-hint">
         Each visitor is remembered in their own browser, so they won't be asked again until these cool-down periods pass.
+      </p>
+
+      <h2 className="form-section-title">Follow-up questions</h2>
+      <p className="field-hint">
+        Shown as the comment label after someone picks a score, tailored to how they responded.
+      </p>
+
+      <div className="field">
+        <label htmlFor="promoter_followup_prompt">Promoters (9–10)</label>
+        <input
+          id="promoter_followup_prompt"
+          type="text"
+          value={form.promoter_followup_prompt}
+          onChange={(e) => updateField('promoter_followup_prompt', e.target.value)}
+          required
+        />
+      </div>
+      <div className="field">
+        <label htmlFor="passive_followup_prompt">Passives (7–8)</label>
+        <input
+          id="passive_followup_prompt"
+          type="text"
+          value={form.passive_followup_prompt}
+          onChange={(e) => updateField('passive_followup_prompt', e.target.value)}
+          required
+        />
+      </div>
+      <div className="field">
+        <label htmlFor="detractor_followup_prompt">Detractors (0–6)</label>
+        <input
+          id="detractor_followup_prompt"
+          type="text"
+          value={form.detractor_followup_prompt}
+          onChange={(e) => updateField('detractor_followup_prompt', e.target.value)}
+          required
+        />
+      </div>
+
+      <h2 className="form-section-title">Where it shows</h2>
+
+      <div className="field-row">
+        <div className="field">
+          <label htmlFor="include_paths">Only show on pages containing (one per line)</label>
+          <textarea
+            id="include_paths"
+            rows={3}
+            placeholder={'Leave blank to show on every page'}
+            value={form.include_paths}
+            onChange={(e) => updateField('include_paths', e.target.value)}
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="exclude_paths">Never show on pages containing (one per line)</label>
+          <textarea
+            id="exclude_paths"
+            rows={3}
+            placeholder={'e.g. /admin'}
+            value={form.exclude_paths}
+            onChange={(e) => updateField('exclude_paths', e.target.value)}
+          />
+        </div>
+      </div>
+      <p className="field-hint">
+        Matched against the page's full URL — e.g. "/pricing" only shows the widget on URLs containing "/pricing".
       </p>
 
       <div className="preview-block">

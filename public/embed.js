@@ -46,6 +46,42 @@
     }
   }
 
+  function npsCategory(score) {
+    if (score <= 6) return 'detractor'
+    if (score <= 8) return 'passive'
+    return 'promoter'
+  }
+
+  function followupPrompt(scorecard, score) {
+    var category = npsCategory(score)
+    if (category === 'promoter') return scorecard.promoter_followup_prompt
+    if (category === 'passive') return scorecard.passive_followup_prompt
+    return scorecard.detractor_followup_prompt
+  }
+
+  function parsePatterns(text) {
+    return (text || '')
+      .split('\n')
+      .map(function (line) {
+        return line.trim()
+      })
+      .filter(Boolean)
+  }
+
+  function matchesTargeting(scorecard) {
+    var url = window.location.href
+    var includes = parsePatterns(scorecard.include_paths)
+    var excludes = parsePatterns(scorecard.exclude_paths)
+
+    if (includes.length && !includes.some(function (p) { return url.indexOf(p) !== -1 })) {
+      return false
+    }
+    if (excludes.some(function (p) { return url.indexOf(p) !== -1 })) {
+      return false
+    }
+    return true
+  }
+
   function injectStyles() {
     if (document.getElementById(STYLE_ID)) return
     var style = document.createElement('style')
@@ -211,9 +247,9 @@
         formWrapper.appendChild(emailField)
       }
 
-      var commentInput = el('textarea', { rows: 3, placeholder: "What's the main reason for your score?" })
+      var commentInput = el('textarea', { rows: 3, placeholder: 'Optional' })
       var commentField = el('div', { className: 'snps-field' }, [
-        el('label', { textContent: 'Comments (optional)' }),
+        el('label', { textContent: followupPrompt(scorecard, selectedScore) }),
         commentInput,
       ])
       formWrapper.appendChild(commentField)
@@ -269,6 +305,7 @@
 
     fetchScorecard(scorecardId)
       .then(function (scorecard) {
+        if (!matchesTargeting(scorecard)) return
         renderWidget(scorecard, presetName, presetEmail)
       })
       .catch(function (err) {
