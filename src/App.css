@@ -1115,6 +1115,24 @@
   max-width: 480px;
 }
 
+.form-section-title {
+  font-size: 15px;
+  margin: 4px 0 -8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  color: var(--text-h);
+}
+
+.settings-form input[type='number'] {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text-h);
+  width: 100%;
+}
+
 .settings-form textarea {
   padding: 10px 12px;
   border-radius: var(--radius-sm);

@@ -12,6 +12,10 @@ export function ScorecardEditPage() {
     low_label: scorecard.low_label,
     high_label: scorecard.high_label,
     position: scorecard.position,
+    thank_you_message: scorecard.thank_you_message,
+    dismiss_message: scorecard.dismiss_message,
+    repeat_after_days: scorecard.repeat_after_days,
+    dismiss_snooze_days: scorecard.dismiss_snooze_days,
   })
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState(null)
@@ -29,7 +33,11 @@ export function ScorecardEditPage() {
 
     const { data, error } = await supabase
       .from('scorecards')
-      .update(form)
+      .update({
+        ...form,
+        repeat_after_days: Number(form.repeat_after_days),
+        dismiss_snooze_days: Number(form.dismiss_snooze_days),
+      })
       .eq('id', scorecard.id)
       .select()
       .single()
@@ -126,6 +134,63 @@ export function ScorecardEditPage() {
         </div>
         <p className="field-hint">Where the floating scorecard appears on your website.</p>
       </div>
+
+      <h2 className="form-section-title">Messages</h2>
+
+      <div className="field">
+        <label htmlFor="thank_you_message">Thank you message</label>
+        <textarea
+          id="thank_you_message"
+          rows={2}
+          value={form.thank_you_message}
+          onChange={(e) => updateField('thank_you_message', e.target.value)}
+          required
+        />
+        <p className="field-hint">Shown after someone submits feedback.</p>
+      </div>
+
+      <div className="field">
+        <label htmlFor="dismiss_message">Message on close</label>
+        <textarea
+          id="dismiss_message"
+          rows={2}
+          value={form.dismiss_message}
+          onChange={(e) => updateField('dismiss_message', e.target.value)}
+        />
+        <p className="field-hint">
+          Shown briefly if someone closes the widget without submitting. Leave blank to close immediately with no message.
+        </p>
+      </div>
+
+      <h2 className="form-section-title">Display frequency</h2>
+
+      <div className="field-row">
+        <div className="field">
+          <label htmlFor="repeat_after_days">Days before showing again after a submission</label>
+          <input
+            id="repeat_after_days"
+            type="number"
+            min={1}
+            value={form.repeat_after_days}
+            onChange={(e) => updateField('repeat_after_days', e.target.value)}
+            required
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="dismiss_snooze_days">Days before showing again after being closed</label>
+          <input
+            id="dismiss_snooze_days"
+            type="number"
+            min={1}
+            value={form.dismiss_snooze_days}
+            onChange={(e) => updateField('dismiss_snooze_days', e.target.value)}
+            required
+          />
+        </div>
+      </div>
+      <p className="field-hint">
+        Each visitor is remembered in their own browser, so they won't be asked again until these cool-down periods pass.
+      </p>
 
       <div className="preview-block">
         <p className="field-hint">Preview</p>

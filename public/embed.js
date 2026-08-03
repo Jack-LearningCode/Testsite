@@ -14,11 +14,36 @@
   var SUPABASE_KEY = 'sb_publishable_jKAqrHdWIv4LL_qUDHf5uA_T8GATTMW'
 
   var STYLE_ID = 'simple-nps-styles'
+  var DAY_MS = 24 * 60 * 60 * 1000
 
   var POSITION_STYLES = {
     'bottom-left': { left: '20px', bottom: '20px' },
     'bottom-middle': { left: '50%', bottom: '20px', transform: 'translateX(-50%)' },
     'bottom-right': { right: '20px', bottom: '20px' },
+  }
+
+  // Per-visitor "don't show again until" tracking, kept in this browser's
+  // localStorage — there's no logged-in visitor to key this to server-side.
+  function storageKey(scorecardId) {
+    return 'simple_nps_hide_until_' + scorecardId
+  }
+
+  function getHideUntil(scorecardId) {
+    try {
+      var raw = window.localStorage.getItem(storageKey(scorecardId))
+      return raw ? Number(raw) : 0
+    } catch (e) {
+      return 0
+    }
+  }
+
+  function setHideUntil(scorecardId, timestamp) {
+    try {
+      window.localStorage.setItem(storageKey(scorecardId), String(timestamp))
+    } catch (e) {
+      // localStorage unavailable (e.g. private browsing) — fail silently,
+      // the widget just won't remember this visitor next time.
+    }
   }
 
   function injectStyles() {
@@ -50,7 +75,7 @@
       '.snps-submit{border:none;color:#fff;font-weight:600;font-size:14px;padding:10px 18px;' +
       'border-radius:999px;cursor:pointer;margin-top:4px;}' +
       '.snps-submit:disabled{opacity:0.6;cursor:default;}' +
-      '.snps-thanks{font-size:14px;margin:0;}' +
+      '.snps-message{font-size:14px;margin:0;padding-right:20px;}' +
       '.snps-error{font-size:12px;color:#e11d48;margin-top:6px;}'
     document.head.appendChild(style)
   }
@@ -109,7 +134,17 @@
 
     var closeBtn = el('button', { type: 'button', className: 'snps-close', innerHTML: '&times;', title: 'Close' })
     closeBtn.addEventListener('click', function () {
-      container.remove()
+      setHideUntil(scorecard.id, Date.now() + scorecard.dismiss_snooze_days * DAY_MS)
+
+      if (scorecard.dismiss_message) {
+        widget.innerHTML = ''
+        widget.appendChild(el('p', { className: 'snps-message', textContent: scorecard.dismiss_message }))
+        setTimeout(function () {
+          container.remove()
+        }, 2500)
+      } else {
+        container.remove()
+      }
     })
 
     var question = el('p', { className: 'snps-question', textContent: scorecard.question })
@@ -201,9 +236,10 @@
           page_url: window.location.href,
         })
           .then(function () {
+            setHideUntil(scorecard.id, Date.now() + scorecard.repeat_after_days * DAY_MS)
             widget.innerHTML = ''
             widget.appendChild(closeBtn)
-            widget.appendChild(el('p', { className: 'snps-thanks', textContent: 'Thanks for your feedback!' }))
+            widget.appendChild(el('p', { className: 'snps-message', textContent: scorecard.thank_you_message }))
           })
           .catch(function () {
             submitBtn.disabled = false
@@ -225,6 +261,9 @@
       console.error('[Simple NPS] Missing data-scorecard-id on the embed script tag.')
       return
     }
+
+    if (Date.now() < getHideUntil(scorecardId)) return
+
     var presetName = thisScript.getAttribute('data-name')
     var presetEmail = thisScript.getAttribute('data-email')
 
