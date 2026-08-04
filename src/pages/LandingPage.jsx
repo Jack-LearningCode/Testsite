@@ -111,6 +111,7 @@ export function LandingPage() {
           <a className="nav-link" href="#features">Features</a>
           <a className="nav-link" href="#faq">FAQ</a>
           <a className="nav-link" href="#pricing">Pricing</a>
+          <Link className="nav-link" to="/contact">Contact</Link>
           {user ? (
             <Link className="nav-cta" to="/portal">My account</Link>
           ) : (
@@ -413,6 +414,7 @@ export function LandingPage() {
             <a href="#features">Features</a>
             <a href="#faq">FAQ</a>
             <a href="#pricing">Pricing</a>
+            <Link to="/contact">Contact</Link>
             <Link to="/login">Log in</Link>
           </nav>
           <span className="footer-copyright">© {new Date().getFullYear()} Simple NPS</span>

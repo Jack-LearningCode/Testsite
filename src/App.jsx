@@ -3,6 +3,7 @@ import { AuthProvider } from './AuthContext'
 import { ProtectedRoute } from './ProtectedRoute'
 import { LandingPage } from './pages/LandingPage'
 import { LoginPage } from './pages/LoginPage'
+import { ContactPage } from './pages/ContactPage'
 import { PortalLayout } from './pages/portal/PortalLayout'
 import { ProfilePage } from './pages/portal/ProfilePage'
 import { ScorecardsListPage } from './pages/portal/ScorecardsListPage'
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/contact" element={<ContactPage />} />
 
           <Route
             path="/portal"
