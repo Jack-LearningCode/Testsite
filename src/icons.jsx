@@ -44,3 +44,47 @@ export function ChartIcon() {
     </svg>
   )
 }
+
+export function TargetIcon() {
+  return (
+    <svg {...common}>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1" />
+    </svg>
+  )
+}
+
+export function MessageIcon() {
+  return (
+    <svg {...common}>
+      <path d="M4 5h16v11H8l-4 4V5Z" />
+    </svg>
+  )
+}
+
+export function DownloadIcon() {
+  return (
+    <svg {...common}>
+      <path d="M12 4v11m0 0 4-4m-4 4-4-4" />
+      <path d="M4 18v2h16v-2" />
+    </svg>
+  )
+}
+
+export function ChatIcon() {
+  return (
+    <svg {...common}>
+      <path d="M4 5h16v10H9l-3.5 3.5V15H4V5Z" />
+      <path d="M8 9h8M8 12h5" />
+    </svg>
+  )
+}
+
+export function PuzzleIcon() {
+  return (
+    <svg {...common}>
+      <path d="M9 4h4v2.2a1.8 1.8 0 1 0 2 0V4h4v4h-2.2a1.8 1.8 0 1 0 0 2H19v4h-4v-2.2a1.8 1.8 0 1 0-2 0V14H9v-4H6.8a1.8 1.8 0 1 0 0-2H9V4Z" />
+    </svg>
+  )
+}
