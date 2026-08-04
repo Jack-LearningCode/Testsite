@@ -5,6 +5,7 @@ import { LandingPage } from './pages/LandingPage'
 import { LoginPage } from './pages/LoginPage'
 import { ContactPage } from './pages/ContactPage'
 import { PortalLayout } from './pages/portal/PortalLayout'
+import { AccountPage } from './pages/portal/AccountPage'
 import { ProfilePage } from './pages/portal/ProfilePage'
 import { ScorecardsListPage } from './pages/portal/ScorecardsListPage'
 import { ScorecardLayout } from './pages/portal/ScorecardLayout'
@@ -33,6 +34,7 @@ function App() {
             }
           >
             <Route index element={<Navigate to="scorecards" replace />} />
+            <Route path="account" element={<AccountPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="scorecards" element={<ScorecardsListPage />} />
             <Route path="analytics" element={<GlobalAnalyticsPage />} />

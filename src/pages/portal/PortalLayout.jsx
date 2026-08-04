@@ -53,6 +53,7 @@ export function PortalLayout() {
                 <Link to="/portal/scorecards" onClick={() => setMenuOpen(false)}>Scorecards</Link>
                 <Link to="/portal/analytics" onClick={() => setMenuOpen(false)}>Analytics</Link>
               </div>
+              <Link to="/portal/account" onClick={() => setMenuOpen(false)}>Account</Link>
               <Link to="/portal/profile" onClick={() => setMenuOpen(false)}>Profile</Link>
               <button onClick={() => signOut()}>Sign out</button>
             </div>
