@@ -23,7 +23,7 @@ export function PortalLayout() {
     <div className="portal-page">
       <header className="portal-nav">
         <Link className="logo" to="/">
-          <span className="logo-mark">NPS</span>
+          <img className="logo-mark" src="/logo.png" alt="Simple NPS" />
           Simple NPS
         </Link>
         <nav className="portal-nav-links">

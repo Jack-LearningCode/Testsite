@@ -45,7 +45,7 @@ export function LoginPage() {
   return (
     <div className="auth-page">
       <Link className="auth-logo" to="/">
-        <span className="logo-mark">NPS</span>
+        <img className="logo-mark" src="/logo.png" alt="Simple NPS" />
         Simple NPS
       </Link>
 

@@ -104,7 +104,7 @@ export function LandingPage() {
     <div className="landing-page">
       <header className="landing-nav">
         <Link className="logo" to="/">
-          <span className="logo-mark">NPS</span>
+          <img className="logo-mark" src="/logo.png" alt="Simple NPS" />
           Simple NPS
         </Link>
         <nav className="nav-links">
@@ -406,7 +406,7 @@ export function LandingPage() {
       <footer className="landing-footer">
         <div className="footer-inner">
           <span className="logo">
-            <span className="logo-mark">NPS</span>
+            <img className="logo-mark" src="/logo.png" alt="Simple NPS" />
             Simple NPS
           </span>
           <nav className="footer-links">

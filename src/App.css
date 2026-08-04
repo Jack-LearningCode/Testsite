@@ -42,14 +42,7 @@
 .logo-mark {
   width: 28px;
   height: 28px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 800;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
