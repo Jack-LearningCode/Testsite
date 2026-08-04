@@ -674,11 +674,16 @@
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
   color: var(--text-h);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
+}
+
+.auth-logo .logo-mark {
+  width: 40px;
+  height: 40px;
 }
 
 .auth-card {
