@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../AuthContext'
+import { useAccount } from '../../AccountContext'
 import { supabase } from '../../supabaseClient'
 import { calculateNps } from '../../nps'
 
 export function ScorecardsListPage() {
-  const { user } = useAuth()
+  const { accountId, isAdmin } = useAccount()
   const navigate = useNavigate()
   const [scorecards, setScorecards] = useState(null)
   const [error, setError] = useState(null)
@@ -35,7 +35,7 @@ export function ScorecardsListPage() {
 
     const { data, error } = await supabase
       .from('scorecards')
-      .insert({ user_id: user.id, name: 'Untitled scorecard' })
+      .insert({ account_id: accountId, name: 'Untitled scorecard' })
       .select('id')
       .single()
 
@@ -67,7 +67,7 @@ export function ScorecardsListPage() {
   }
 
   function openScorecard(id) {
-    navigate(`/portal/scorecards/${id}/edit`)
+    navigate(`/portal/scorecards/${id}/${isAdmin ? 'edit' : 'results'}`)
   }
 
   return (
@@ -77,9 +77,11 @@ export function ScorecardsListPage() {
           <h1>Scorecards</h1>
           <p className="portal-subtitle">Create and manage your NPS scorecards.</p>
         </div>
-        <button className="cta-button" onClick={handleCreate} disabled={creating}>
-          {creating ? 'Creating...' : 'New scorecard'}
-        </button>
+        {isAdmin && (
+          <button className="cta-button" onClick={handleCreate} disabled={creating}>
+            {creating ? 'Creating...' : 'New scorecard'}
+          </button>
+        )}
       </div>
 
       {error && <p className="error-message">{error}</p>}
@@ -88,10 +90,12 @@ export function ScorecardsListPage() {
 
       {scorecards && scorecards.length === 0 && (
         <div className="empty-state">
-          <p>You don't have any scorecards yet.</p>
-          <button className="cta-button" onClick={handleCreate} disabled={creating}>
-            Create your first scorecard
-          </button>
+          <p>No scorecards yet.</p>
+          {isAdmin && (
+            <button className="cta-button" onClick={handleCreate} disabled={creating}>
+              Create your first scorecard
+            </button>
+          )}
         </div>
       )}
 
@@ -111,14 +115,16 @@ export function ScorecardsListPage() {
                   if (e.key === 'Enter') openScorecard(card.id)
                 }}
               >
-                <button
-                  className="scorecard-delete"
-                  onClick={(e) => handleDelete(e, card.id)}
-                  aria-label="Delete scorecard"
-                  title="Delete scorecard"
-                >
-                  &times;
-                </button>
+                {isAdmin && (
+                  <button
+                    className="scorecard-delete"
+                    onClick={(e) => handleDelete(e, card.id)}
+                    aria-label="Delete scorecard"
+                    title="Delete scorecard"
+                  >
+                    &times;
+                  </button>
+                )}
 
                 <h3>{card.name}</h3>
                 <p className="scorecard-question-preview">{card.question}</p>

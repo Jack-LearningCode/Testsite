@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
+import { useAccount } from '../AccountContext'
+import { supabase } from '../supabaseClient'
 
 export function LoginPage() {
   const { user, signIn, signUp } = useAuth()
+  const { refresh } = useAccount()
   const navigate = useNavigate()
 
   const [mode, setMode] = useState('sign-in')
@@ -37,6 +40,11 @@ export function LoginPage() {
     if (mode === 'sign-up' && !data.session) {
       setMessage('Check your email to confirm your account before signing in.')
       return
+    }
+
+    if (mode === 'sign-up') {
+      await supabase.rpc('create_my_account')
+      await refresh()
     }
 
     navigate('/portal')

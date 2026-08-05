@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useParams } from 'react-router-dom'
 import { supabase } from '../../supabaseClient'
+import { useAccount } from '../../AccountContext'
 
 export function ScorecardLayout() {
+  const { isAdmin } = useAccount()
   const { scorecardId } = useParams()
   const [scorecard, setScorecard] = useState(null)
   const [error, setError] = useState(null)
@@ -51,12 +53,16 @@ export function ScorecardLayout() {
       <h1>{scorecard.name}</h1>
 
       <nav className="tab-nav">
-        <NavLink to={`/portal/scorecards/${scorecardId}/edit`} className={({ isActive }) => isActive ? 'tab active' : 'tab'}>
-          Edit
-        </NavLink>
-        <NavLink to={`/portal/scorecards/${scorecardId}/embed`} className={({ isActive }) => isActive ? 'tab active' : 'tab'}>
-          Embed code
-        </NavLink>
+        {isAdmin && (
+          <NavLink to={`/portal/scorecards/${scorecardId}/edit`} className={({ isActive }) => isActive ? 'tab active' : 'tab'}>
+            Edit
+          </NavLink>
+        )}
+        {isAdmin && (
+          <NavLink to={`/portal/scorecards/${scorecardId}/embed`} className={({ isActive }) => isActive ? 'tab active' : 'tab'}>
+            Embed code
+          </NavLink>
+        )}
         <NavLink to={`/portal/scorecards/${scorecardId}/results`} className={({ isActive }) => isActive ? 'tab active' : 'tab'}>
           Results
         </NavLink>

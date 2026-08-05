@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import { supabase } from '../../supabaseClient'
 import { npsCategory } from '../../nps'
+import { useAccount } from '../../AccountContext'
 
 const STATUS_OPTIONS = [
   { value: 'new', label: 'New' },
@@ -55,6 +56,7 @@ function NotesCell({ response, onSave }) {
 }
 
 export function ResultsPage() {
+  const { isAdmin } = useAccount()
   const { scorecard } = useOutletContext()
   const [responses, setResponses] = useState(null)
   const [error, setError] = useState(null)
@@ -151,18 +153,26 @@ export function ResultsPage() {
                   ) : '—'}
                 </td>
                 <td>
-                  <select
-                    className="status-select"
-                    value={response.status}
-                    onChange={(e) => updateResponse(response.id, { status: e.target.value })}
-                  >
-                    {STATUS_OPTIONS.map((opt) => (
-                      <option key={opt.value} value={opt.value}>{opt.label}</option>
-                    ))}
-                  </select>
+                  {isAdmin ? (
+                    <select
+                      className="status-select"
+                      value={response.status}
+                      onChange={(e) => updateResponse(response.id, { status: e.target.value })}
+                    >
+                      {STATUS_OPTIONS.map((opt) => (
+                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    STATUS_OPTIONS.find((opt) => opt.value === response.status)?.label ?? response.status
+                  )}
                 </td>
                 <td>
-                  <NotesCell response={response} onSave={(notes) => updateResponse(response.id, { notes })} />
+                  {isAdmin ? (
+                    <NotesCell response={response} onSave={(notes) => updateResponse(response.id, { notes })} />
+                  ) : (
+                    response.notes || '—'
+                  )}
                 </td>
               </tr>
             ))}
