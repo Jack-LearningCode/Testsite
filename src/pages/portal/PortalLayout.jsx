@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useAuth } from '../../AuthContext'
+import { useAccount } from '../../AccountContext'
 
 export function PortalLayout() {
   const { user, signOut } = useAuth()
+  const { isAdmin } = useAccount()
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef(null)
 
@@ -39,6 +41,14 @@ export function PortalLayout() {
           >
             Analytics
           </NavLink>
+          {isAdmin && (
+            <NavLink
+              to="/portal/webhooks"
+              className={({ isActive }) => 'portal-nav-link' + (isActive ? ' active' : '')}
+            >
+              Webhooks
+            </NavLink>
+          )}
         </nav>
 
         <div className="account-menu" ref={menuRef}>
@@ -52,6 +62,9 @@ export function PortalLayout() {
               <div className="account-menu-mobile-links">
                 <Link to="/portal/scorecards" onClick={() => setMenuOpen(false)}>Scorecards</Link>
                 <Link to="/portal/analytics" onClick={() => setMenuOpen(false)}>Analytics</Link>
+                {isAdmin && (
+                  <Link to="/portal/webhooks" onClick={() => setMenuOpen(false)}>Webhooks</Link>
+                )}
               </div>
               <Link to="/portal/account" onClick={() => setMenuOpen(false)}>Account</Link>
               <Link to="/portal/profile" onClick={() => setMenuOpen(false)}>Profile</Link>

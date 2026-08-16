@@ -19,6 +19,7 @@ import { EmbedCodePage } from './pages/portal/EmbedCodePage'
 import { ResultsPage } from './pages/portal/ResultsPage'
 import { AnalyticsPage } from './pages/portal/AnalyticsPage'
 import { GlobalAnalyticsPage } from './pages/portal/GlobalAnalyticsPage'
+import { WebhooksPage } from './pages/portal/WebhooksPage'
 import './App.css'
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
               <Route path="profile" element={<ProfilePage />} />
               <Route path="scorecards" element={<ScorecardsListPage />} />
               <Route path="analytics" element={<GlobalAnalyticsPage />} />
+              <Route path="webhooks" element={<WebhooksPage />} />
               <Route path="scorecards/:scorecardId" element={<ScorecardLayout />}>
                 <Route index element={<Navigate to="edit" replace />} />
                 <Route path="edit" element={<AdminRoute><ScorecardEditPage /></AdminRoute>} />
