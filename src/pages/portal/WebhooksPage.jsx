@@ -26,6 +26,64 @@ const EXAMPLE_PAYLOAD = `{
   }
 }`
 
+const BLOCKED_HOST_PATTERNS = [
+  /^localhost$/,
+  /^0\.0\.0\.0$/,
+  /^::1$/,
+  /^127\./,
+  /^10\./,
+  /^172\.(1[6-9]|2\d|3[01])\./,
+  /^192\.168\./,
+  /^169\.254\./,
+]
+
+function validateWebhookUrl(value) {
+  let parsed
+  try {
+    parsed = new URL(value)
+  } catch {
+    return 'Enter a valid URL.'
+  }
+
+  if (parsed.protocol !== 'https:') {
+    return 'Webhook URLs must use https:// so response data isn’t sent in plain text.'
+  }
+
+  const host = parsed.hostname.toLowerCase()
+  if (BLOCKED_HOST_PATTERNS.some((pattern) => pattern.test(host))) {
+    return 'That URL points to a local or private address, which isn’t allowed.'
+  }
+
+  return null
+}
+
+function CreatedSecretNotice({ secret, onDismiss }) {
+  const [copied, setCopied] = useState(false)
+
+  async function handleCopy() {
+    await navigator.clipboard.writeText(secret)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <div className="account-card">
+      <h2>Save your signing secret</h2>
+      <p className="field-hint">
+        This is shown only once. Use it to verify the <code>X-Simple-NPS-Signature</code> header on
+        every request this webhook sends you — see "What gets sent" below.
+      </p>
+      <div className="code-block">
+        <pre>{secret}</pre>
+        <button className="cta-button secondary code-copy" onClick={handleCopy}>
+          {copied ? 'Copied!' : 'Copy'}
+        </button>
+      </div>
+      <button className="link-button" onClick={onDismiss}>I've saved it</button>
+    </div>
+  )
+}
+
 export function WebhooksPage() {
   const { accountId, isAdmin } = useAccount()
 
@@ -37,6 +95,7 @@ export function WebhooksPage() {
   const [scorecardId, setScorecardId] = useState('')
   const [url, setUrl] = useState('')
   const [saving, setSaving] = useState(false)
+  const [createdSecret, setCreatedSecret] = useState(null)
 
   function loadWebhooks() {
     if (!accountId) return
@@ -70,22 +129,36 @@ export function WebhooksPage() {
   async function handleCreate(e) {
     e.preventDefault()
     setError(null)
+    setCreatedSecret(null)
+
+    const validationError = validateWebhookUrl(url)
+    if (validationError) {
+      setError(validationError)
+      return
+    }
+
     setSaving(true)
 
-    const { error } = await supabase.from('webhooks').insert({
-      account_id: accountId,
-      name,
-      url,
-      scorecard_id: scorecardId || null,
-    })
+    const { data, error } = await supabase
+      .from('webhooks')
+      .insert({ account_id: accountId, name, url, scorecard_id: scorecardId || null })
+      .select('secret')
+      .single()
 
     setSaving(false)
 
     if (error) {
-      setError(error.message)
+      setError(
+        error.message.includes('webhooks_url_https_check')
+          ? 'Webhook URLs must use https://.'
+          : error.message.includes('webhooks_url_not_internal_check')
+            ? 'That URL points to a local or private address, which isn’t allowed.'
+            : error.message
+      )
       return
     }
 
+    setCreatedSecret(data.secret)
     setName('')
     setUrl('')
     setScorecardId('')
@@ -133,6 +206,10 @@ export function WebhooksPage() {
         Get an HTTP POST the moment someone submits an NPS response.
       </p>
 
+      {createdSecret && (
+        <CreatedSecretNotice secret={createdSecret} onDismiss={() => setCreatedSecret(null)} />
+      )}
+
       <div className="account-card">
         <h2>Create a webhook</h2>
         <form className="invite-form" onSubmit={handleCreate}>
@@ -173,6 +250,7 @@ export function WebhooksPage() {
               placeholder="https://"
               required
             />
+            <p className="field-hint">Must be HTTPS, and reachable from the public internet.</p>
           </div>
 
           {error && <p className="error-message">{error}</p>}
@@ -237,6 +315,13 @@ export function WebhooksPage() {
       <div className="code-block">
         <pre>{EXAMPLE_PAYLOAD}</pre>
       </div>
+
+      <p className="field-hint">
+        Each request also includes an <code>X-Simple-NPS-Signature</code> header, formatted as{' '}
+        <code>sha256=&lt;hex&gt;</code> — an HMAC-SHA256 of the exact JSON body, signed with your
+        webhook's secret. Recompute it yourself and compare to confirm a request genuinely came
+        from Simple NPS before trusting it.
+      </p>
     </main>
   )
 }
