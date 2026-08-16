@@ -18,7 +18,7 @@ export function AccountOverviewPage() {
       <h2>Account details</h2>
       <dl>
         <dt>Plan</dt>
-        <dd><span className="plan-badge">Simple NPS — £50/month</span></dd>
+        <dd><span className="plan-badge">Simple NPS — £90/month</span></dd>
 
         <dt>Account created</dt>
         <dd>{createdDate}</dd>
