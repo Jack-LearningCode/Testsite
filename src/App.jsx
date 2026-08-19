@@ -20,6 +20,8 @@ import { ResultsPage } from './pages/portal/ResultsPage'
 import { AnalyticsPage } from './pages/portal/AnalyticsPage'
 import { GlobalAnalyticsPage } from './pages/portal/GlobalAnalyticsPage'
 import { WebhooksPage } from './pages/portal/WebhooksPage'
+import { CookieConsent } from './CookieConsent'
+import { PageviewTracker } from './PageviewTracker'
 import './App.css'
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <AccountProvider>
+          <PageviewTracker />
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -59,6 +62,7 @@ function App() {
               </Route>
             </Route>
           </Routes>
+          <CookieConsent />
         </AccountProvider>
       </AuthProvider>
     </BrowserRouter>

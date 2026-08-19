@@ -1003,6 +1003,21 @@
   font-weight: 600;
 }
 
+.plan-badge.status-active {
+  background: color-mix(in srgb, #16a34a 16%, transparent);
+  color: #16a34a;
+}
+
+.plan-badge.status-warning {
+  background: color-mix(in srgb, #f59e0b 18%, transparent);
+  color: #b45309;
+}
+
+.plan-badge.status-muted {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+
 .team-member-row {
   display: flex;
   align-items: center;
@@ -1952,4 +1967,67 @@
 
 .cta-banner .cta-button:hover {
   box-shadow: var(--shadow-lg);
+}
+
+/* ---------- Cookie consent banner ---------- */
+
+.cookie-banner {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 18px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.cookie-banner p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text);
+  flex: 1 1 320px;
+}
+
+.cookie-banner p a {
+  color: var(--accent);
+}
+
+.cookie-banner-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .cookie-banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .cookie-banner p {
+    font-size: 13px;
+  }
+
+  .cookie-banner-actions {
+    width: 100%;
+  }
+
+  .cookie-banner-actions .cta-button {
+    flex: 1;
+    padding: 11px 18px;
+    font-size: 14px;
+  }
 }

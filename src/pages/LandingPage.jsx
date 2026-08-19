@@ -131,7 +131,7 @@ export function LandingPage() {
             <p className="hero-subtitle">
               Simple NPS gives you the same core capabilities as £1,500/month
               platforms — scorecards, smart follow-ups, and full reporting — for
-              just £90 a month.
+              just £100 a month.
             </p>
             <div className="hero-actions">
               <Link className="cta-button" to="/login">Get started</Link>
@@ -357,7 +357,7 @@ export function LandingPage() {
           <div className="pricing">
             <div className="pricing-card">
               <span className="pricing-badge">Simple, honest pricing</span>
-              <h2>£90<span>/month</span></h2>
+              <h2>£100<span>/month</span></h2>
               <p>Everything you need to run NPS surveys that actually get used.</p>
               <ul>
                 <li><span className="check">✓</span> Unlimited NPS scorecards</li>
@@ -365,7 +365,7 @@ export function LandingPage() {
                 <li><span className="check">✓</span> Page targeting &amp; display frequency controls</li>
                 <li><span className="check">✓</span> Full response history, analytics &amp; CSV export</li>
               </ul>
-              <Link className="cta-button" to="/login">Start for £90/month</Link>
+              <Link className="cta-button" to="/login">Start for £100/month</Link>
               <p className="pricing-footnote">
                 Comparable feature sets from legacy NPS platforms typically start
                 around £1,500/month.
@@ -400,7 +400,7 @@ export function LandingPage() {
           <MessageIcon />
           <h2>Start hearing from your customers today</h2>
           <p>Set up your first scorecard in minutes. No setup fees, cancel any time.</p>
-          <Link className="cta-button" to="/login">Get started for £90/month</Link>
+          <Link className="cta-button" to="/login">Get started for £100/month</Link>
         </div>
       </section>
 
