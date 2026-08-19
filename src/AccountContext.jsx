@@ -19,7 +19,7 @@ export function AccountProvider({ children }) {
     setLoading(true)
     return supabase
       .from('account_members')
-      .select('account_id, role, accounts(name, created_at)')
+      .select('account_id, role, accounts(name, created_at, subscription_status, current_period_end, cancel_at_period_end)')
       .eq('user_id', user.id)
       .eq('status', 'active')
       .maybeSingle()
@@ -38,6 +38,9 @@ export function AccountProvider({ children }) {
     accountId: membership?.account_id ?? null,
     accountName: membership?.accounts?.name ?? null,
     accountCreatedAt: membership?.accounts?.created_at ?? null,
+    subscriptionStatus: membership?.accounts?.subscription_status ?? null,
+    currentPeriodEnd: membership?.accounts?.current_period_end ?? null,
+    cancelAtPeriodEnd: membership?.accounts?.cancel_at_period_end ?? false,
     role: membership?.role ?? null,
     isAdmin: membership?.role === 'admin',
     refresh,

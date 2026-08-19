@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /portal
+Disallow: /invite
+Disallow: /login
+
+Sitemap: https://simplenps.com/sitemap.xml
