@@ -1,0 +1,311 @@
+--- PAGE 1 ---
+Pets Places 
+Website Functionality 
+Functions Overview 
+•Subscription service, free trial & booking fee
+•Pet owner account creation, proﬁle, and pets proﬁle page 
+•Boarders account creation  
+•Boarders advertising page & initial enquiry
+•Messaging system & booking overview 
+•Payment system (pet owners to boarders) 
+•Search capabilities and algorithm for search results/landing page 
+•Reviews & private feedback 
+•Notiﬁcations 
+Other things to address 
+-Easy to view past & future bookings (pet boarders & owners)
+-Analytics for pet boarders to see number of bookings made, money made, etc
+-Menu options (logged in and not logged in)
+-Footer options (T&C’s, support, join as a boarder)
+-Boarder ID veriﬁcation
+-Pre-approval for adverts to go live
+-Badges automated (ID veriﬁed, multiple 5 star reviews) or manual options for boarders to 
+choose (nail clipping, gives medication)
+-Support pages
+
+--- PAGE 2 ---
+Subscription service, free trial & booking fee 
+Subscription service (boarder) 
+After the free trial expires, the subscription automatically starts. This means the payment is taken, 
+either monthly or annually (prefer annual only, unless reason to oﬀer both options). 
+Boarders should be able to cancel their subscription at any time, however, they will not receive a 
+refund, instead they will maintain full access until the subscription renewal date lapses.
+Upon the subscription lapsing, the boarder will still be able to log into their account but have 
+limited access to services:
+-No live advert visible to the public
+-Able to view all pet owner conversations, booking overviews and payments. 
+-Not able to take new payments
+-Limited messaging with existing customers only (need to be able to discuss current/future 
+bookings still)
+Free trial (boarder) 
+After registering and creating their advert, they are blocked by a paywall before they can publish. 
+The paywall should state the monthly or annual cost but note a 30 day free trial period and that 
+no payment will be taken at this time, however payment details must be collected to continue.
+Boarders can cancel the free trial at any time, however, they will maintain full access until the free 
+trial date lapses.
+Upon the free trial lapsing, the boarder will still be able to log into their account but have limited 
+access to services:
+-No live advert visible to the public
+-Able to view all pet owner conversations, booking overviews and payments. 
+-Not able to take new payments
+-Limited messaging with existing customers only (need to be able to discuss current/future 
+bookings still)
+Booking fee (pet owner) 
+Sharetribe provided 500 free transactions per month, with all subsequent transactions being 
+charged to Pets Places at c. 14p per transaction. 
+Pet owners pay a booking fee for each booking/payment. 
+We looked a ﬂat fee of 50p per transaction, however, if multiple payments are made per booking 
+(deposit, remaining balance, adjustment to booking dates), this could add up and frustrate pet 
+owners and risk business for boarders.
+We considered a percentage rate per transaction, however, large bookings would accrue a large 
+booking fee unfairly. 
+This is a large income revenue stream so needs to be done smartly.  
+--- PAGE 3 ---
+Pet owners account creation, proﬁle, and pets proﬁle page 
+When creating an account, the boarder must need to:
+-Provide an email address
+-Create a password
+-Personal name(s)
+-Tick to agree T&C’s
+-Tick to opt into newsletters
+On logging in they are able to choose to search boarders/explore the site, but encouraged to set 
+up their proﬁle and their pet proﬁles (proﬁle completion scale for encouragement).
+-Proﬁle picture (optional)
+-Date joined	 
+-Bio (‘Pets Places is built on relationships. Help other people get to know you’)
+-Postcode 
+-Phone number(s)
+-Email(s)
+When no pets created: ‘Add Pet Proﬁle’ button.
+When pets created: ‘Manage Pet Proﬁle(s)’ button.
+Pet proﬁles will display as a thumbprint sized proﬁle picture, pet name underneath, pet type 
+underneath that. Evenly spaced out side by side.
+To see further information about each pet, click on pets proﬁle picture or name to expand page 
+underneath. 
+When expanded view/‘managing pet proﬁles’ you can see/update:
+-Pet name
+-Pet proﬁle picture
+-Pet age/dob (needs to auto update as year passes)
+-Pet type
+-Pet breed
+-Description (free text box)
+-Neutering Information
+-Vaccination Records
+-Microchip Number
+-Medical Needs
+-Authority to act on behalf of in an emergency (tickbox)
+-‘No longer active’ button
+Underneath, registered vet details (vets name, phone number, website, address)
+
+--- PAGE 4 ---
+Boarders account creation 
+When creating an account, the boarder must need to:
+-Provide an email address
+-Create a password
+-Business name
+-Personal name(s)
+-Tick to agree T&C’s
+-Tick to opt into newsletters
+Upon logging in, the boarder is able to explore the site, but be encouraged to create their advert 
+(through pop ups, reminders, email notiﬁcations). Completion scale for encouragement.
+To publish their advert, the boarder should be blocked by a paywall. This should state the monthly 
+or annual cost but note a free 30 day trial period and that no payment will be taken at this time, 
+however payment details must be collected to continue.
+Boarders can then publish their adverts and set up payment through Stripe. 
+Quality control prior to published adverts going live, to ensure photos, bios, etc are up to 
+standard. Easy review capabilities within Pets Places control to approve or send feedback.
+See Boarders advertising page for further details.
+
+--- PAGE 5 ---
+Boarders advertising page & initial enquiry 
+-Business name
+-Individuals name
+-About us section
+-Favourite button
+-Share button
+-Year established
+-Home address or postcode
+-Map to show location / radius map for home visits
+-Boarder to add photos of their facilities (max 10 photos)
+-Boarder to add company logo (if applicable)
+-Boarder to add proﬁle picture
+-Pricing (possible Cats from: £x. Small Pets from £x.)
+-Opening hours 
+-Languages spoken
+-Types of services oﬀered
+-Types of pets cared for
+-Ratings average and number of reviews
+-Rating breakdown summary (cleanliness, communication, accuracy)
+-Free text reviews from pet owners
+-Proﬁle Badges (viewing available, insurance, parking available, nail clipping, medication)
+-Calendar (for visual date selection when enquiring/to show estimated cost)
+-Boarders terms & conditions (cancellation policy)
+-What to bring
+For pet owners to make an enquiry through the messaging system, they must have a log in. 
+Pet owners need to be able to click on the calendar and select dates. Calendar highlights the 
+dates selected and calculates the number of days/nights. ‘Enquire without dates’ button available 
+to still make enquiry when information not known. 
+The ‘active’ pets from the pet owners proﬁle will display (pets name and photo) for the pet owner 
+to select. ‘Manage Pet Proﬁles’ button available to edit and add pets prior to enquiry. If no pets 
+have been added ‘Add pets proﬁle’ button to provide option. ‘Enquire without selecting pets 
+proﬁle’ button option if the pet owner does not want to set up or include pet pro ﬁle for their 
+enquiry.
+Free text box with prompt suggesting what to say (viewing, special requests, etc).
+‘Submit enquiry’ button sends the message and details to the boarder, and this message creates 
+a new messaging record within the pet owners and boarders inbox.
+At the bottom of the boarders advert should be a selection of other relevant boarder advert 
+previews to click on.
+
+--- PAGE 6 ---
+Messaging system & booking overview 
+Once a pet owner has sent their initial enquiry, it will appear in the pet owner and boarders 
+internal inbox. They should be able to see when their message has been read. Each conversation 
+with a diﬀerent boarder or pet owner within the inbox should show a summary of the pet owners/
+boarders (and company) name, proﬁle picture, a preview of the latest message. 
+Clicking on the proﬁle picture of the pet owner or boarder, takes you to their proﬁle. Clicking on 
+the message preview takes you to the conversation. The conversation shows all messages. To the 
+side is a summary of the enquiry details (dates in written form, pet proﬁle pictures). The boarder 
+also has the option to send a booking overview and payment request at any time. 
+To send a booking overview and payment request, boarder clicks ‘send new booking overview 
+and payment request’ button. A new window pops up, displaying a calendar to select the dates.
+Below, the pets proﬁle pictures, names and pet type are displayed, with the text ‘Select pets for 
+boarding’. Click on each pet to choose them. A ring of colour displays around image to show it 
+has been selected. 
+Below is a free text box to add additional information. 
+Below is a box to display a total cost, and another for the deposit amount. The boarder can 
+choose to add a percentage or monetary amount (percentage amount will be calculated from total 
+cost entered).  If left blank, no deposit option displays to pet owner. Below, is a submit button.
+When a payment request is sent to the pet owner, the initial enquiry information is replaced on the 
+side by the information used in the booking overview. This will display the selected dates in 
+written form, the pets proﬁle pictures and names, selected by the boarder, and any free text 
+entered by the boarder. Clicking on the pets proﬁle picture will show the information related to 
+that pet. Underneath, they will see the cost, and the deposit amount, with the option to select 
+which one they wish to pay. If no deposit is added by the boarder, the full amount only will be 
+displayed. If a deposit is paid, a breakdown of the remaining balance will display.
+Once paid, the pet owner and boarder will be notiﬁed of successful payment and conversation 
+can continue as needed. The booking overview and payment details will remain on the side.
+The boarder can also send a ‘how to prepare for your pets stay’ template. This can include  
+business opening hours (by appointment only), parking instructions, nearby train stations and a 
+visual list of items to bring. 
+If a pet owner wants to make multiple bookings at one time, or make additional bookings at a 
+later date, they are likely to message within the same conversation, rather than send a new 
+enquiry through the boarders advert. Upon agreeing the new booking(s) boarders can create 
+additional booking overviews and payment requests, by clicking the ‘send new booking overview 
+and payment request’ button.
+Boarders should be able to update the booking overview at any time, but the pet owner should 
+always be notiﬁed of this. Any updates to booking dates should not altar the amount already paid 
+for that booking (if deposit done by percentage).
+If more than one booking has been made within the conversation, the system should be able to 
+cycle through overviews made, automatically displaying the booking with the nearest date. 
+Once a booking has passed, it should come oﬀ of the messaging system but be stored in a 
+booking history section of the log in, for both pet owner. The boarder should also be able to 
+access booking history easily, but may need to have several ﬁltering sections to narrow down 
+customers. 
+
+--- PAGE 7 ---
+Example of ‘booking overview and payment request’ creation for boarder 
+
+--- PAGE 8 ---
+Payment system  
+(pet owners to boarders)
+Boarders can create ‘booking overviews and payment requests’ at any time. They can create 
+multiple booking within the same conversation for customers to deal with multiple bookings.
+Adjusted booking dates should not aﬀect deposits paid for that booking.
+Where there are multiple bookings for one customer, any payments made should only reﬂect 
+within their assigned booking. (i.e. if Booking 1 is added in, the deposit for Booking 2 should not 
+then display in Booking 1).
+Refunds through Stripe, and linked via Pets Places website/messaging system. Jack?
+
+--- PAGE 9 ---
+Search capabilities and algorithm for search results/landing page 
+Search capabilities:
+-Distance radius (postcode/address)
+-Pet types
+-Boarding type (day care, boarder, home visits)
+Filters:
+Parking available
+Collection & drop oﬀ service
+Administer medication
+Disabled access
+Languages spoken
+Search shows results by closest distance ﬁrst. 
+Boarders advert preview display on left-hand side, map displays on right-hand side, showing 
+location inputted and boarders in that area.
+Advert preview and map results can be clicked on to open that boarders advert page.
+Map results have Pets Places logo/mark as the boarder result icons.
+Advert previews should show:
+-Photo with scrolling capabilities 
+-Favourite button
+-Business name
+-Town name
+-Review rating (and number of reviews)
+When clicking on a search result, the advert should open in a new tab.
+Landing Page 
+When going onto home-page, without logging in, search bar and suggestions display (like Airbnb). 
+As no location information will be available, can an algorithm chop and change results for the 
+following categories, displaying in rows of 6:
+-Small Pet Boarding 
+-Dog Boarding
+-Cat Sitting
+-Home Visits
+When logged in, use location information to narrow down the algorithm results. They do not need 
+to be directly local, but display nearby towns (i.e. cat sitters near Maidstone. Dog boarders near 
+Rochester.) Even if they have pet proﬁles set up, the landing page should still show results for all 
+boarding types, but reﬁned to more localised areas. 
+The next upcoming booking should display on the home page when logged in, showing the 
+boarder and dates.
+
+--- PAGE 10 ---
+Airbnb landing page example  
+ 
+
+--- PAGE 11 ---
+Reviews & private feedback 
+After a booking is complete, an email or notiﬁcation is sent to the pet owner to review their latest 
+stay.
+There should be simple 1-5 star rating options for diﬀerent parts of the experience:
+-Cleanliness
+-Accuracy
+-Communication
+-Overall
+Pros to multiple star options:
+•Pet owners can look at the rating of what is most important to them.
+•Boarders can see where they need improvement easily.
+•Pets Places can see where boarders need help easily, if we need to step in, following lots of bad 
+reviews.
+Cons to multiple star options:
+•More steps to completing a review
+•Repetitive if someone is using the boarder regular and completing the review each time.
+If a pet owner is repeatedly using the same boarder, and has previously reviewed them, we may 
+want an option to opt out of future review email requests. There should still be the option to easily 
+review that boarder on the website, as experiences can change.
+Reviews should only be possible from veriﬁed customers. 
+Host should be able to respond to any free text reviews. 
+Private feedback should be possible for owners to leave boarders feedback, separate from 
+reviews, to remain private from anyone else seeing. The boarder should be able to respond with 
+one message. Any further messages would then need to be taken to the messaging system.  
+
+--- PAGE 12 ---
+Notiﬁcations 
+Pet owners should be notiﬁed by email when:
+-Complete proﬁle reminder
+-A boarder messages them
+-A booking overview is created
+-A booking overview is updated by the boarder in any way
+-When they make any payment, to conﬁrm booking
+-Invitation to pay outstanding balances one week before booking start date
+-Reminder of booking, one month, one week, one day before booking start date
+-Reminder to leave a review for boarder once booking has passed
+-Updates to T&Cs
+-New feature releases (can opt out)
+Boarders should be notiﬁed by email when:
+-Free trial expiry reminder (7 days)
+-Complete advert reminder
+-A pet owner messages them
+-A payment has been made
+-Reminder of booking one day before start date
+-Updates to T&Cs
+-New feature releases
+-Annual subscription reminder (30 days)
+-Annual subscription renewed
+-Sign up to subscription with discount code (if cancelled free trial)
+Note for us: Auto emails sent from noreply@petsplaces.co.uk

@@ -6,6 +6,12 @@
       "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
       "runtimeArgs": ["node_modules/vite/bin/vite.js"],
       "port": 5173
+    },
+    {
+      "name": "pets-places",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": ["C:\\Users\\Jack\\Documents\\PetsPlaces\\node_modules\\vite\\bin\\vite.js", "C:\\Users\\Jack\\Documents\\PetsPlaces", "--config", "C:\\Users\\Jack\\Documents\\PetsPlaces\\vite.config.js", "--port", "5180"],
+      "port": 5180
     }
   ]
 }
